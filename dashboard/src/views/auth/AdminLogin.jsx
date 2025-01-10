@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaFacebook, FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { admin_login } from '../../store/Reducers/authReducer';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { admin_login, messageClear } from '../../store/Reducers/authReducer';
+import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-hot-toast';
 
 const AdminLogin = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { loader, errorMessage, successMessage } = useSelector(state => state.auth);
 
     const [state, setState] = useState({
         email: "",
@@ -25,6 +29,28 @@ const AdminLogin = () => {
         dispatch(admin_login(state)); // ei fn call hole state gulo authReducer file a chole jay
         // console.log(state);
     };
+
+    // style for loader
+    const overrideStyle = {
+        display: "flex",
+        margin: "0 auto",
+        height: "24px",
+        justifyContent: "center",
+        alignItems: "center",
+    };
+
+    // handle error | success message
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage);
+            dispatch(messageClear());
+        }
+        if (successMessage) {
+            toast.success(successMessage);
+            dispatch(messageClear());
+            navigate('/');
+        }
+    }, [errorMessage, successMessage]);
 
     return (
         <div className='min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center'>
@@ -54,7 +80,9 @@ const AdminLogin = () => {
 
                         {/* Submit Button */}
                         <button className='bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3'>
-                            Sign Up
+                            {
+                                loader ? <PropagateLoader color='#fff' cssOverride={overrideStyle} /> : "Login"
+                            }
                         </button>
 
                         {/* Redirecte Field */}
