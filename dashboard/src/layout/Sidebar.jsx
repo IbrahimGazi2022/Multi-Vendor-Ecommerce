@@ -29,7 +29,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
                     <ul>
                         {
                             allNav.map((n, i) =>
-                                <Link to={n.path} className={`${pathname === n.path ? 'bg-blue-600 shadow-indigo-500/50 text-white duration-500' : 'text-[#030811] font-bold duration-200 '} px-[12px] py-[9px] rounded-sm flex justify-start items-center gap-[12px] hover:pl-4 transition-all w-full mb-1 `} >
+                                <Link key={i} to={n.path} className={`${pathname === n.path ? 'bg-blue-600 shadow-indigo-500/50 text-white duration-500' : 'text-[#030811] font-bold duration-200 '} px-[12px] py-[9px] rounded-sm flex justify-start items-center gap-[12px] hover:pl-4 transition-all w-full mb-1 `} >
                                     <li key={i} className='flex items-center gap-[10px]'>
                                         <span>{<n.icon />}</span>
                                         <span>{n.title}</span>
