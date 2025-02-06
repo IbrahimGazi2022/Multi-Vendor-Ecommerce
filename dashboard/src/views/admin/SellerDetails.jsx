@@ -9,7 +9,7 @@ const SellerDetails = () => {
                 <div className='w-full flex flex-wrap text-[#d0d2d6]'>
                     <div className='w-3/12 flex justify-center items-center py-3'>
                         <div>
-                            <img className='w-full h-[230px]' src="http://localhost:5173/images/demo.jpg" alt="" />
+                            <img className='w-full h-[230px]' src="http://localhost:3000/images/demo.jpg" alt="" />
                         </div>
                     </div>
 
