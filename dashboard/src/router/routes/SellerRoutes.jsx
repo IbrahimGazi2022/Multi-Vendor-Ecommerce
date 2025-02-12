@@ -4,6 +4,8 @@ const SellerDashboard = lazy(() => import('../../views/seller/SellerDashboard'))
 const AddProduct = lazy(() => import('../../views/seller/AddProduct'));
 const Products = lazy(() => import('../../views/seller/Products'));
 const DiscountProducts = lazy(() => import('../../views/seller/DiscountProducts'));
+const Orders = lazy(() => import('../../views/seller/Orders'));
+const Payments = lazy(() => import('../../views/seller/Payments'));
 
 export const sellerRoutes = [
     {
@@ -22,7 +24,8 @@ export const sellerRoutes = [
                 <SellerDashboard />
             </Suspense>
         ,
-        ability: ['seller']
+        role: 'seller',
+        status: 'active'
     },
     {
         path: '/seller/dashboard/add-product',
@@ -31,7 +34,8 @@ export const sellerRoutes = [
                 <AddProduct />
             </Suspense>
         ,
-        ability: ['seller']
+        role: 'seller',
+        status: 'active'
     },
     {
         path: '/seller/dashboard/products',
@@ -40,7 +44,8 @@ export const sellerRoutes = [
                 <Products />
             </Suspense>
         ,
-        ability: ['seller']
+        role: 'seller',
+        status: 'active'
     },
     {
         path: '/seller/dashboard/discount-product',
@@ -49,6 +54,27 @@ export const sellerRoutes = [
                 <DiscountProducts />
             </Suspense>
         ,
-        ability: ['seller']
+        role: 'seller',
+        status: 'active'
+    },
+    {
+        path: '/seller/dashboard/orders',
+        element:
+            <Suspense>
+                <Orders />
+            </Suspense>
+        ,
+        role: 'seller',
+        ability: ['active', 'deactive']
+    },
+    {
+        path: '/seller/dashboard/payments',
+        element:
+            <Suspense>
+                <Payments />
+            </Suspense>
+        ,
+        role: 'seller',
+        status: 'active'
     },
 ];
