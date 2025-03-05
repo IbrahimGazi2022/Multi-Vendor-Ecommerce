@@ -8,7 +8,9 @@ const Orders = lazy(() => import('../../views/seller/Orders'));
 const Payments = lazy(() => import('../../views/seller/Payments'));
 const SellerToAdmin = lazy(() => import('../../views/seller/SellerToAdmin'));
 const SellerToCustomer = lazy(() => import('../../views/seller/SellerToCustomer'));
-const Profile = lazy(()=> import('../../views/seller/Profile'))
+const Profile = lazy(() => import('../../views/seller/Profile'));
+const EditProduct = lazy(() => import('../../views/seller/EditProduct'));
+const OrderDetails = lazy(() => import('../../views/seller/OrderDetails'));
 
 export const sellerRoutes = [
     {
@@ -115,6 +117,26 @@ export const sellerRoutes = [
         element:
             <Suspense>
                 <Profile />
+            </Suspense>
+        ,
+        role: 'seller',
+        status: 'active'
+    },
+    {
+        path: '/seller/dashboard/edit-product/:productId',
+        element:
+            <Suspense>
+                <EditProduct />
+            </Suspense>
+        ,
+        role: 'seller',
+        status: 'active'
+    },
+    {
+        path: '/seller/dashboard/order/details/:orderId',
+        element:
+            <Suspense>
+                <OrderDetails />
             </Suspense>
         ,
         role: 'seller',
