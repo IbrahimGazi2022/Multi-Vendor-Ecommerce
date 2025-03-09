@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { overrideStyle } from '../../utils/utils';
+import { seller_login, messageClear } from '../../store/Reducers/authReducer';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const { loader, successMessage, errorMessage } = useSelector(state => state.auth);
 
     const [state, setState] = useState({
         email: "",
@@ -18,8 +25,19 @@ const Login = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(state);
+        dispatch(seller_login(state)); // ei fn call hole state gulo authReducer file a chole jay
     };
+
+    useEffect(() => {
+        if (successMessage) {
+            toast.success(successMessage);
+            dispatch(messageClear());
+        }
+        if (errorMessage) {
+            toast.error(errorMessage);
+            dispatch(messageClear());
+        }
+    }, [successMessage, errorMessage]);
 
     return (
         <div className='min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center'>
@@ -43,8 +61,10 @@ const Login = () => {
                         </div>
 
                         {/* Submit Button */}
-                        <button className='bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3'>
-                            Sign Up
+                        <button disabled={loader ? true : false} className='bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3'>
+                            {
+                                loader ? <PropagateLoader color='#fff' cssOverride={overrideStyle} /> : "Login"
+                            }
                         </button>
 
                         {/* Redirecte Field */}

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { admin_login, messageClear } from '../../store/Reducers/authReducer';
+import { overrideStyle } from '../../utils/utils';
 import { PropagateLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 
@@ -28,15 +29,6 @@ const AdminLogin = () => {
         e.preventDefault();
         dispatch(admin_login(state)); // ei fn call hole state gulo authReducer file a chole jay
         // console.log(state);
-    };
-
-    // style for loader
-    const overrideStyle = {
-        display: "flex",
-        margin: "0 auto",
-        height: "24px",
-        justifyContent: "center",
-        alignItems: "center",
     };
 
     // handle error | success message
