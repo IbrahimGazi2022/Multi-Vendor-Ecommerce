@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
@@ -8,6 +8,7 @@ import { overrideStyle } from '../../utils/utils';
 import { seller_register, messageClear } from '../../store/Reducers/authReducer';
 
 const Register = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { loader, successMessage, errorMessage } = useSelector(state => state.auth);
 
@@ -33,6 +34,7 @@ const Register = () => {
         if (successMessage) {
             toast.success(successMessage);
             dispatch(messageClear());
+            navigate("/");
         }
         if (errorMessage) {
             toast.error(errorMessage);

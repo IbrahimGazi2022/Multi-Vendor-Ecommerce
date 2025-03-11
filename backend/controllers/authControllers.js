@@ -109,6 +109,22 @@ class authControllers {
         }
 
     }; // End Seller Login Method
+
+    getUser = async (req, res) => {
+        const { id, role } = req;
+
+        try {
+            if (role === 'admin') {
+                const user = await adminModel.findById(id);
+                responseReturn(res, 200, { userInfo: user });
+            } else {
+                const seller = await sellerModel.findById(id);
+                responseReturn(res, 200, { userInfo: seller });
+            }
+        } catch (error) {
+            responseReturn(res, 500, { error: 'Internal Server Error' });
+        }
+    }; // End Get User Method
 }
 
 module.exports = new authControllers();
